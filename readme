@@ -1,0 +1,5 @@
+Projet réalisé par Enzo Ghizzardi et Mehdi Mansour dans le cadre de l'UE "Software Engineering", Master 1 Informatique à l'Université Nice Côte d'Azur.
+
+Pour utiliser le programme, vous devez lancer depuis un terminal, dans le répertoire "Sudoku", la commande "java -jar SudokuSolver.jar maGrille.txt" (on utilise l'exécutable .jar).
+
+NB : la grille sous forme de fichier txt fournie en paramètre DOIT ÊTRE PLACE DANS LE REPERTOIRE "Grilles" (contenue dans le répertoire "Sudoku") pour être correctement lu par le programme !
