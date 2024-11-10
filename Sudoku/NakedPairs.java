@@ -29,16 +29,17 @@ public class NakedPairs extends DeductionRule {
 
     public boolean applyToRow(SudokuGrid grid, Set<Integer> possibleMoves, int[] val, int i, int j) {
         // to apply the rule to the row of the cell
-        int coord = -1 ;
+        int coord = -1 ; // to keep in memory the coordinates of the cell containing the same naked pair
         for (int k=0; k<9; k++) {
             if (k != j) {
                 Set<Integer> pMoves = new HashSet<>() ;
                 pMoves = grid.getCell(i,k).getPossibleMoves() ;
                 if (possibleMoves.equals(pMoves) && pMoves.size() == 2) {
+                    // if we find the naked pair, we keep the coordinates of the cell
                     if (coord == -1) {
                         coord = k ;
                     }
-                    else { return false ; }
+                    else { return false ; } // If we find the naked pair a second time, the rule does not apply
                 }
                 else { continue ; }
             }
@@ -46,13 +47,14 @@ public class NakedPairs extends DeductionRule {
         if (coord != -1) {
             boolean test = false ;
             for (int k=0; k<9; k++) {
-                if (k != j && k != coord) {
+                if (k != j && k != coord) { // we do not remove the possible moves from the set of two cells containing the naked pairs
                     for (int v : val) {
                         Set<Integer> pMoves2 = grid.getCell(i,k).getPossibleMoves();
                         if (test == false && (pMoves2.contains(v))) {
+                            // boolean to check if there is a change
                             test = true ;
-                            grid.getCell(i, k).removePossibleMoves(v);
                         }
+                        grid.getCell(i, k).removePossibleMoves(v);
                     }
                 }
             }
@@ -64,16 +66,17 @@ public class NakedPairs extends DeductionRule {
 
     public boolean applyToColumn(SudokuGrid grid, Set<Integer> possibleMoves, int[] val, int i, int j) {
         // to apply the rule to the column of the cell
-        int coord = -1 ;
+        int coord = -1 ; // to keep in memory the coordinates of the cell containing the same naked pair
         for (int k=0; k<9; k++) {
             if (k != i) {
                 Set<Integer> pMoves = new HashSet<>() ;
                 pMoves = grid.getCell(k,j).getPossibleMoves() ;
                 if (possibleMoves.equals(pMoves) && pMoves.size() == 2) {
+                    // if we find the naked pair, we keep the coordinates of the cell
                     if (coord == -1) {
                         coord = k ;
                     }
-                    else { return false ; }
+                    else { return false ; } // If we find the naked pair a second time, the rule does not apply
                 }
                 else { continue ; }
             }
@@ -81,13 +84,14 @@ public class NakedPairs extends DeductionRule {
         if (coord != -1) {
             boolean test = false ;
             for (int k=0; k<9; k++) {
-                if (k != i && k != coord) {
+                if (k != i && k != coord) { // we do not remove the possible moves from the set of two cells containing the naked pairs
                     for (int v : val) {
                         Set<Integer> pMoves2 = grid.getCell(k,j).getPossibleMoves();
                         if (test == false && (pMoves2.contains(v))) {
+                            // boolean to check if there is a change
                             test = true ;
-                            grid.getCell(k, j).removePossibleMoves(v);
                         }
+                        grid.getCell(k, j).removePossibleMoves(v);
                     }
                 }
             }
@@ -99,18 +103,19 @@ public class NakedPairs extends DeductionRule {
 
     public boolean applyToBlock(SudokuGrid grid, Set<Integer> possibleMoves, int[] val, int i, int j) {
         // to apply the rule to the block of the cell
-        int[] coord = {-1, -1} ;
+        int[] coord = {-1, -1} ; // to keep in memory the coordinates of the cell containing the same naked pair
         int ii = i / 3 ; int jj = i / 3 ;
         for (int k = ii*3; k < ii*3+3; k++) {
             for (int l = jj*3; l < jj*3+3; l++) {
                 if (k != i && l != j) {
                     Set<Integer> pMoves = new HashSet<>() ;
                     pMoves = grid.getCell(i,k).getPossibleMoves() ;
-                    if (possibleMoves.equals(pMoves)) {
+                    if (possibleMoves.equals(pMoves) && pMoves.size() == 2) {
+                        // if we find the naked pair, we keep the coordinates of the cell
                         if (coord[0] == -1) {
                             coord[0] = k ; coord[1] = l ;
                         }
-                        else { return false ; }
+                        else { return false ; } // If we find the naked pair a second time, the rule does not apply
                     }
                     else { continue ; }
                 }
@@ -120,14 +125,14 @@ public class NakedPairs extends DeductionRule {
             boolean test = false ;
             for (int k = ii*3; k < ii*3+3; k++) {
                 for (int l = jj*3; l < jj*3+3; l++) {
-                    System.out.print("APPLY TO BLOCK") ;
-                    if ((k != i && l != j) || (k != coord[0] && l != coord[1])) {
+                    if ((k != i && l != j) || (k != coord[0] && l != coord[1])) { // we do not remove the possible moves from the set of two cells containing the naked pairs
                         for (int v : val) {
                             Set<Integer> pMoves2 = grid.getCell(k,l).getPossibleMoves();
                             if (test == false && pMoves2.contains(v)) {
+                                // boolean to check if there is a change
                                 test = true ;
-                                grid.getCell(k, l).removePossibleMoves(v);
                             }
+                            grid.getCell(k, l).removePossibleMoves(v);
                         }
                     }
                 }
