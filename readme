@@ -1,4 +1,4 @@
-Projet réalisé par Enzo Ghizzardi et Mehdi Mansour dans le cadre de l'UE "Software Engineering", Master 1 Informatique à l'Université Nice Côte d'Azur.
+Projet réalisé par Enzo Ghizzardi et Mehdi Mansour dans le cadre de l'UE "Software Engineering", Master 1 Informatique à l'Université Nice Côte d'Azur, 2024-2025.
 
 Pour utiliser le programme, vous devez lancer depuis un terminal, dans le répertoire "Sudoku", la commande "java -jar SudokuSolver.jar maGrille.txt" (on utilise l'exécutable .jar).
 
